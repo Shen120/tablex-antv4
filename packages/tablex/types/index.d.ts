@@ -4,7 +4,7 @@ export type ValidateResult = { valid: boolean; message: string };
 
 export type EditTools = [
   "edit" | "add" | "delete",
-  { icon: string; text: string; props: {}; handler: (e: any) => void },
+  { icon: React.ReactNode; text: string; props: {}; handler: (e: any) => void },
   (e: any) => React.ReactNode
 ];
 
@@ -14,15 +14,15 @@ export type EditToolsConfig = {
   props: object;
   itemStyle: object;
   editText: string;
-  editIcon: string;
+  editIcon: React.ReactNode;
   addText: string;
-  addIcon: string;
+  addIcon: React.ReactNode;
   deleteText: string;
-  deleteIcon: string;
+  deleteIcon: React.ReactNode;
   okText: string;
-  okIcon: string;
+  okIcon: React.ReactNode;
   cancelText: string;
-  cancelIcon: string;
+  cancelIcon: React.ReactNode;
 };
 
 export interface ColumnProps<T> {

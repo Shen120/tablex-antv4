@@ -1,6 +1,6 @@
 {
-  "name": "tablex",
-  "version": "1.18.53",
+  "name": "tablex-antdv4",
+  "version": "1.0.0",
   "description": "table virtualized tree-table ",
   "author": "nexx",
   "repository": {
@@ -35,9 +35,10 @@
   ],
   "license": "ISC",
   "peerDependencies": {
-    "antd": "^3.20.3",
+    "antd": "^4.24.8",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "@ant-design/icons": "^4.8.0"
   },
   "dependencies": {
     "lodash": "^4.17.11",
@@ -48,10 +49,11 @@
     "react-sortable-hoc": "^1.9.1"
   },
   "devDependencies": {
-    "antd": "^3.20.3",
+    "antd": "^4.24.8",
     "docz": "^1.2.0",
     "docz-plugin-css": "^0.11.0",
     "docz-theme-default": "^1.2.0",
-    "father-build": "^1.17.2"
+    "father-build": "^1.17.2",
+    "@ant-design/icons": "^4.8.0"
   }
 }

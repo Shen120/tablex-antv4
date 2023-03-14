@@ -2,10 +2,14 @@
 
 [![NPM version](https://img.shields.io/npm/v/tablex.svg?style=flat)](https://npmjs.org/package/tablex) [![NPM downloads](http://img.shields.io/npm/dm/tablex.svg?style=flat)](http://npmjs.com/package/tablex)
 
-基于 [react-window](https://github.com/bvaughn/react-window) 的表格组件
+基于 [Tablex](https://github.com/NexxLuo/tablex) 的表格组件
 
 Learn more at the [website](https://tablex.now.sh/packages/website)
 
+
+## ⚠ Attentions
+1. `editToolsConfig`中`xxxIcon`属性现在是直接传入`ReactNode`
+2. `editTools`中`icon`属性现在是直接传入`ReactNode`
 
 ## Install
 

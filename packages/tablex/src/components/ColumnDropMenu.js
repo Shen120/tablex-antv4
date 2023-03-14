@@ -1,25 +1,7 @@
 import React from "react";
 
-import { Menu, Checkbox } from "../widgets";
+import {Checkbox, Menu} from "../widgets";
 
-const SubMenu = Menu.SubMenu;
-
-const MenuBar = () => {
-  return (
-    <svg
-      viewBox="0 0 1024 1024"
-      focusable="false"
-      class=""
-      data-icon="bars"
-      width="1em"
-      height="1em"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M912 192H328c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h584c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 284H328c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h584c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 284H328c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h584c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM104 228a56 56 0 1 0 112 0 56 56 0 1 0-112 0zm0 284a56 56 0 1 0 112 0 56 56 0 1 0-112 0zm0 284a56 56 0 1 0 112 0 56 56 0 1 0-112 0z" />
-    </svg>
-  );
-};
 
 const MenuIcon = () => {
   return (
@@ -74,7 +56,7 @@ class HeadDropMenu extends React.Component {
     let columns = arr; //.filter(d => !!d.title)
 
     const columnsOptions = [];
-    let defaultChecked = [];
+    const defaultChecked = [];
 
     columns.forEach((c, i) => {
       let columnKey = c.key || c.dataIndex;
@@ -119,11 +101,9 @@ class HeadDropMenu extends React.Component {
       );
     });
 
-    const columnsFilterItems = (
-      <div style={{ marginLeft: 10 }}>{columnsOptions}</div>
+    return (
+        <div style={{marginLeft: 10}}>{columnsOptions}</div>
     );
-
-    return columnsFilterItems;
   };
 
   handleClick = ({ item, key, keyPath, domEvent }) => {
@@ -185,53 +165,37 @@ class HeadDropMenu extends React.Component {
             this.stateRef.current.isOnClick = false;
             this.setState({ openKeys: keys });
           }}
-        >
-          {fixable && (
-            <SubMenu
-              key="sub1"
-              title={this.props.intl["columnMenuFixed"]}
-              onTitleClick={this.onTitleClick}
-            >
-              <Menu.Item key="1" style={styles}>
-                {this.props.intl["columnMenuFixedLeft"]}
-              </Menu.Item>
-              <Menu.Item key="2" style={styles}>
-                {this.props.intl["columnMenuFixedRight"]}
-              </Menu.Item>
-              <Menu.Item key="3" style={styles}>
-                {this.props.intl["columnMenuFixedReset"]}
-              </Menu.Item>
-            </SubMenu>
-          )}
-          {filterable && (
-            <SubMenu
-              key="sub2"
-              title={this.props.intl["columnMenuVisible"]}
-              onTitleClick={this.onTitleClick}
-            >
-              <Menu.Item key="4" style={styles} onClick={this.onItemClick}>
-                {this.columnsFilter()}
-              </Menu.Item>
-            </SubMenu>
-          )}
-          {groupable && (
-            <SubMenu
-              key="sub3"
-              title={this.props.intl["columnMenuGroup"]}
-              onTitleClick={this.onTitleClick}
-            >
-              <Menu.Item key="6" style={styles}>
-                {this.props.intl["columnMenuGroupAdd"]}
-              </Menu.Item>
-              <Menu.Item key="7" style={styles}>
-                {this.props.intl["columnMenuGroupRemove"]}
-              </Menu.Item>
-              <Menu.Item key="8" style={styles}>
-                {this.props.intl["columnMenuGroupReset"]}
-              </Menu.Item>
-            </SubMenu>
-          )}
-        </Menu>
+          items={[
+            fixable && {
+              key: "sub1",
+              label: this.props.intl["columnMenuFixed"],
+              onTitleClick: this.onTitleClick,
+              children: [
+                {key: "1", label: this.props.intl["columnMenuFixedLeft"], style: styles},
+                {key: "2", label: this.props.intl["columnMenuFixedRight"], style: styles},
+                {key: "3", label: this.props.intl["columnMenuFixedReset"], style: styles},
+              ]
+            },
+            filterable && {
+              key: "sub2",
+              label: this.props.intl["columnMenuVisible"],
+              onTitleClick: this.onTitleClick,
+              children: [
+                {key: "4", label: this.columnsFilter(), style: styles, onClick: this.onItemClick},
+              ]
+            },
+            groupable && {
+              key: "sub3",
+              label: this.props.intl["columnMenuGroup"],
+              onTitleClick: this.onTitleClick,
+              children: [
+                {key: "6", label: this.props.intl["columnMenuGroupAdd"], style: styles},
+                {key: "7", label: this.props.intl["columnMenuGroupRemove"], style: styles},
+                {key: "8", label: this.props.intl["columnMenuGroupReset"], style: styles},
+              ]
+            }
+          ].filter(Boolean)}
+        />
       </div>
     );
   }
@@ -245,7 +209,6 @@ HeadDropMenu.defaultProps = {
     settingWidth: "宽度：",
     settingFixed: "冻结：",
     settingFixedLeft: "左",
-    settingFixedNone: "无",
     settingFixedRight: "右",
     settingVisible: "显示",
     settingHidden: "隐藏",

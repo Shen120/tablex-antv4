@@ -16,8 +16,9 @@ import {
   deleteData,
   distinctData
 } from "./utils";
+import { DownOutlined } from '@ant-design/icons'
 
-import { message, Button, Popconfirm, Menu, Dropdown, Icon } from "./widgets";
+import { message, Button, Popconfirm, Menu, Dropdown } from "./widgets";
 
 import orderBy from "lodash/orderBy";
 import "./styles.css";
@@ -1828,23 +1829,19 @@ class EditableTable extends React.Component {
     let itemStyle = config.itemStyle || {};
 
     let okText = config.okText || this.props.intl["editOkButton"];
-    let okIcon = config.okIcon || "";
-    okIcon = okIcon ? <Icon type={okIcon} /> : null;
+    let okIcon = config.okIcon || null;
+
     let cancelText = config.cancelText || this.props.intl["editCancelButton"];
-    let cancelIcon = config.cancelIcon || "";
-    cancelIcon = cancelIcon ? <Icon type={cancelIcon} /> : null;
+    let cancelIcon = config.cancelIcon || null;
 
     let addText = config.addText || this.props.intl["addButton"];
-    let addIcon = config.addIcon || "";
-    addIcon = addIcon ? <Icon type={addIcon} /> : null;
+    let addIcon = config.addIcon || null;
 
     let editText = config.editText || this.props.intl["editButton"];
-    let editIcon = config.editIcon || "";
-    editIcon = editIcon ? <Icon type={editIcon} /> : null;
+    let editIcon = config.editIcon || null;
 
     let deleteText = config.deleteText || this.props.intl["deleteButton"];
-    let deleteIcon = config.deleteIcon || "";
-    deleteIcon = deleteIcon ? <Icon type={deleteIcon} /> : null;
+    let deleteIcon = config.deleteIcon || null;
 
     if (this.props.singleRowEdit !== true && isEditing) {
       buttons.push(
@@ -1895,14 +1892,13 @@ class EditableTable extends React.Component {
       let styles = { ...itemStyle };
 
       const menu = (
-        <Menu onClick={e => this.addRange(e.item.props.value)}>
-          <Menu.Item key="1" value={5}>
-            5 {rangeUnitText}
-          </Menu.Item>
-          <Menu.Item key="2" value={10}>
-            10 {rangeUnitText}
-          </Menu.Item>
-        </Menu>
+        <Menu
+            onClick={e => this.addRange(e.item.value)}
+            items={[
+              {key: "1", value: 5, label: <span>5 {rangeUnitText}</span>},
+              {key: "2", value: 10, label: <span>10 {rangeUnitText}</span>},
+            ]}
+        />
       );
 
       if (showTypes.indexOf(1) > -1) {
@@ -1936,7 +1932,7 @@ class EditableTable extends React.Component {
                   className="table-tools-item table-tools-add"
                 >
                   {addIcon} {addText}
-                  <Icon type="down" />
+                  <DownOutlined />
                 </Button>
               </Dropdown>,
               d,
@@ -2023,7 +2019,6 @@ class EditableTable extends React.Component {
 
         if (typeof d === "object" && d !== null) {
           let toolIcon = d.icon;
-          toolIcon = toolIcon ? <Icon type={toolIcon} /> : null;
           let toolAttr = d.props || {};
           buttons.push(
             wrapper(
@@ -2711,15 +2706,15 @@ EditableTable.defaultProps = {
     props: {},
     itemStyle: {},
     editText: "",
-    editIcon: "",
+    editIcon: null,
     addText: "",
-    addIcon: "",
+    addIcon: null,
     deleteText: "",
-    deleteIcon: "",
+    deleteIcon: null,
     okText: "",
-    okIcon: "",
+    okIcon: null,
     cancelText: "",
-    cancelIcon: ""
+    cancelIcon: null
   },
   edittingToolsShowType: 1,
   defaultAddCount: 1,
@@ -2799,9 +2794,9 @@ EditableTable.propTypes = {
   editorClickBubble: PropTypes.bool,
   /** 工具栏样式 */
   toolBarStyle: PropTypes.object,
-  /** 工具栏，工具按钮 ['edit', 'add','delete',{icon:"",text:"",props:{},handler:Function},Function] addSingle:单行新增 */
+  /** 工具栏，工具按钮 ['edit', 'add','delete',{icon:React.ReactNode,text:"",props:{},handler:Function},Function] addSingle:单行新增 */
   editTools: PropTypes.array,
-  /** 工具栏，工具按钮属性配置{wrapper:function,props:{}, position: "bottom", itemStyle: {}, editText: "", editIcon: "", addText: "", addIcon: "", deleteText: "", deleteIcon: "", okText: "", okIcon: "", cancelText: "", cancelIcon: "" } */
+  /** 工具栏，工具按钮属性配置{wrapper:function,props:{}, position: "bottom", itemStyle: {}, editText: "", editIcon: "", addText: "", addIcon: React.ReactNode, deleteText: "", deleteIcon: React.ReactNode, okText: "", okIcon: React.ReactNode, cancelText: "", cancelIcon: React.ReactNode } */
   editToolsConfig: PropTypes.object,
   /** 额外的工具栏按钮渲染 */
   extraTools: PropTypes.func,

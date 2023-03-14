@@ -11,7 +11,6 @@ import ASwitch from "antd/lib/switch";
 import Amessage from "antd/lib/message";
 import APopconfirm from "antd/lib/popconfirm";
 import ADropdown from "antd/lib/dropdown";
-import AIcon from "antd/lib/icon";
 import ASpin from "antd/lib/spin";
 import APopover from "antd/lib/popover";
 import ASelect from "antd/lib/select";
@@ -60,8 +59,6 @@ function RadioButton(props) {
   return <ARadio.Button {...props} />;
 }
 
-
-
 Radio.Group = RadioGroup;
 Radio.Button = RadioButton;
 
@@ -83,10 +80,6 @@ function Popconfirm(props) {
 
 function Dropdown(props) {
   return <ADropdown {...props} />;
-}
-
-function Icon(props) {
-  return <AIcon {...props} />;
 }
 
 function Spin(props) {
@@ -182,7 +175,6 @@ export {
   message,
   Popconfirm,
   Dropdown,
-  Icon,
   Spin,
   Popover
 };
